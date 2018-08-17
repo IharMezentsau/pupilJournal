@@ -1,11 +1,11 @@
-<form action="/pupil/add" method="POST" class="form-signin">
+<form action="/pupil/add" method="POST">
 
     <div class="text-center mb-4">
         <p class="h3 mb-3 font-weight-normal">Добавить ученика</p>
     </div>
 
     <div class="container">
-        <div class="form-label-group">
+        <div class="form-group">
             <input type="text" name="familyname" class="form-control" placeholder="Фамилия"
                    required="" autofocus="">
         </div>
@@ -15,12 +15,12 @@
                    required="" autofocus="">
         </div>
 
-        <div class="form-label-group">
+        <div class="form-group">
             <input type="text" name="fathername" class="form-control" placeholder="Отчество"
                    required="" autofocus="">
         </div>
 
-        <div class="form-label-group">
+        <div class="form-group">
             <input type="text" name="bidth" class="form-control" placeholder="День рождения"
                    required="" autofocus="">
         </div>

@@ -7,7 +7,7 @@ return [
         'action' => 'index',
     ],
 
-    'add/{id:\d+}' => [
+    'add' => [
         'controller' => 'main',
         'action' => 'add',
     ],
@@ -28,7 +28,7 @@ return [
         'action' => 'update',
     ],
 
-    'pupil/delete' => [
+    'delete/{id:\d+}' => [
     'controller' => 'pupil',
         'action' => 'delete',
     ],

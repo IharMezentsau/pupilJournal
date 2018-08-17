@@ -12,8 +12,18 @@ class Pupil extends Model
     {
         $sql = 'INSERT INTO t_pupil(name, familyname, fathername, bidth)
                 VALUES(:name, :familyname, :fathername, :bidth)';
-        $result = $this->db->query($sql, $params);
+        $this->db->query($sql, $params);
+    }
 
+    public function updatePupil($params)
+    {
+        $this->db->query('UPDATE t_pupil SET name=:name, familyname=:familyname,
+                              fathername=:fathername, bidth=:bidth WHERE id=:id', $params);
+    }
+
+    public function deletePupil($params)
+    {
+        $this->db->query('DELETE FROM t_pupil WHERE id=:id', $params);
     }
 
     public function isIdExists($id)
@@ -24,12 +34,12 @@ class Pupil extends Model
         return $this->db->getRow('SELECT id FROM t_pupil WHERE id = :id', $params);
     }
 
-    public function pupilValidate($post)
+    public function pupilValidate()
     {
-        $nameLength = iconv_strlen($post['name']);
-        $familynameLength = iconv_strlen($post['familyname']);
-        $fathernameLength = iconv_strlen($post['fathername']);
-        $bidth = iconv_strlen($post['bidth']);
+        $nameLength = iconv_strlen($_POST['name']);
+        $familynameLength = iconv_strlen($_POST['familyname']);
+        $fathernameLength = iconv_strlen($_POST['fathername']);
+        $bidth = iconv_strlen($_POST['bidth']);
 
         if ($nameLength < 3 or $nameLength > 20) {
             $this->error = 'Имя должно содержать от 3 до 20 символов';
@@ -45,9 +55,13 @@ class Pupil extends Model
         return true;
     }
 
-    public function htmlEnt($val)
+    public function htmlEnt($params)
     {
-        return htmlentities($val);
+        $post = array();
+        foreach ($params as $key => $value)
+        {
+            $post[$key] = htmlentities($value);
+        }
+        return $post;
     }
-
 }

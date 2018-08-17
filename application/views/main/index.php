@@ -4,7 +4,7 @@
 </span>
 <table class="table table-bordered">
     <thead>
-        <tr>
+        <tr style="background: darkgrey">
             <th>ФИО</th>
             <th>День рождения</th>
             <th>Возраст</th>
@@ -13,13 +13,14 @@
         </tr>
     </thead>
     <tbody>
+    <?php $i = true;?>
     <?php foreach ($pupils as $value): ?>
-        <tr>
+        <tr style="background: <?php if (!$i) {echo 'darkgrey'; $i = true;} else {$i = false;}?>">
             <td><?php echo ($value['familyname'] . ' ' .
                             $value['name'] . ' ' .
                             $value['fathername']); ?></td>
             <td><?php echo $value['bidth']; ?></td>
-            <td><?php echo 'test'; ?></td>
+            <td><?php echo $value['age']; ?></td>
             <td>
                 <a href="/update/<?php echo $value['id']; ?>" class="btn btn-secondary">
                     Редактировать

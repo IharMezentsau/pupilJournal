@@ -8,9 +8,8 @@ class MainController extends Controller
 {
     public function indexAction()
     {
-
         $result = $this->model->getPupil();
-
+        //debug($result);
         $vars = [
             'pupils' => $result,
         ];

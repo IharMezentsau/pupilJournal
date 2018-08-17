@@ -9,9 +9,9 @@ class PupilController extends Controller
     public function addAction()
     {
         if (!empty($_POST)) {
-            //$params=$_POST;
-            if ($this->model->pupilValidate($_POST)) {
-                $params = $this->protectedHtml($_POST);
+            if ($this->model->pupilValidate()) {
+                $post = $this->postParams();
+                $params = $this->model->htmlEnt($post);
                 $this->model->addPupil($params);
                 $this->view->redirect('/');
             } else {
@@ -24,29 +24,49 @@ class PupilController extends Controller
     public function updateAction()
     {
         if (!empty($_POST)) {
-            $params=$_POST;
-            //$post = $this->protectedHtml($_POST);
-            $this->model->updatePupil($params);
-            $this->view->redirect('/');
+            if ($this->model->pupilValidate()) {
+                $post = $this->postParams();
+                $params = $this->model->htmlEnt($post);
+                $this->model->updatePupil($params);
+                $this->view->redirect('/');
+            }
         };
     }
 
     public function deleteAction()
     {
-        if (!$this->model->isIdExists($this->route['id'])) {
+        if ($this->model->isIdExists($this->route['id'])) {
+            $params = [
+                'id' => $this->route['id'],
+            ];
+            $this->model->deletePupil($params);
+            $this->view->redirect('/');
+        } else {
             $this->view->errorCode(404);
         }
-        $this->view->redirect('/');
     }
 
-    public function protectedHtml($post)
+    public function postParams()
     {
-        $post = [
-            'name' => htmlentities($_POST['name']),
-            'familyname' => htmlentities($_POST['familyname']),
-            'fathername' => htmlentities($_POST['fathername']),
-            'bidth' => htmlentities($_POST['bidth']),
-        ];
+        $bidth = explode('.', $_POST['bidth']);
+        krsort($bidth);
+        $bidth = implode('.', $bidth);
+        if (isset($_POST['id'])) {
+            $post = [
+                'id' => $_POST['id'],
+                'name' => $_POST['name'],
+                'familyname' => $_POST['familyname'],
+                'fathername' => $_POST['fathername'],
+                'bidth' => $bidth,
+            ];
+        } else {
+            $post = [
+                'name' => $_POST['name'],
+                'familyname' => $_POST['familyname'],
+                'fathername' => $_POST['fathername'],
+                'bidth' => $bidth,
+            ];
+        }
 
         return $post;
     }
