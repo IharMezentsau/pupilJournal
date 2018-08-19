@@ -12,4 +12,14 @@ abstract class Model
     {
         $this->db = new Db();
     }
+
+    public function htmlEnt($params)
+    {
+        $post = array();
+        foreach ($params as $key => $value)
+        {
+            $post[$key] = htmlentities($value);
+        }
+        return $post;
+    }
 }

@@ -36,32 +36,39 @@ class Pupil extends Model
 
     public function pupilValidate()
     {
+        if (!isset($_POST['name'])) {
+            $this->error = 5;
+            return false;
+        } elseif (!isset($_POST['familyname'])) {
+            $this->error = 6;
+            return false;
+        } elseif (!isset($_POST['fathername'])) {
+            $this->error = 7;
+            return false;
+        } elseif (!isset($_POST['bidth'])) {
+            $this->error = 8;
+            return false;
+        };
         $nameLength = iconv_strlen($_POST['name']);
         $familynameLength = iconv_strlen($_POST['familyname']);
         $fathernameLength = iconv_strlen($_POST['fathername']);
-        $bidth = iconv_strlen($_POST['bidth']);
-
-        if ($nameLength < 3 or $nameLength > 20) {
-            $this->error = 'Имя должно содержать от 3 до 20 символов';
+        $bidthLength = iconv_strlen($_POST['bidth']);
+        $bidthDay = explode('.', $_POST['bidth']);
+        if ($nameLength < 2 or $nameLength > 20) {
+            $this->error = 1;
             return false;
         } elseif ($familynameLength < 3 or $familynameLength > 30) {
-            $this->error = 'Фамилия должна содержать от 3 до 0 символов';
+            $this->error = 2;
             return false;
         } elseif ($fathernameLength < 3 or $fathernameLength > 50) {
-            $this->error = 'Отчество должно содержать от 3 до 50 символов';
+            $this->error = 3;
             return false;
-        };
-
+        } elseif (!checkdate($bidthDay[1], $bidthDay[0], $bidthDay[2]) or ($bidthLength != 10)) {
+            $this->error = 4;
+            return false;
+        }
         return true;
     }
 
-    public function htmlEnt($params)
-    {
-        $post = array();
-        foreach ($params as $key => $value)
-        {
-            $post[$key] = htmlentities($value);
-        }
-        return $post;
-    }
+
 }

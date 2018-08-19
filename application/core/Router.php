@@ -37,6 +37,7 @@ class Router
                 {
                     if (is_string($key)) {
                         if (is_numeric($match)) {
+                            $match = htmlentities($match);
                             $match = (int) $match;
                         }
                         $params[$key] = $match;

@@ -7,22 +7,22 @@
     <div class="container">
         <div class="form-group">
             <input type="text" name="familyname" class="form-control" placeholder="Фамилия"
-                   required="" autofocus="">
+                   minlength="3" maxlength="30" required="" autofocus="">
         </div>
 
         <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="Имя"
-                   required="" autofocus="">
+                   minlength="2" maxlength="20" required="" autofocus="">
         </div>
 
         <div class="form-group">
             <input type="text" name="fathername" class="form-control" placeholder="Отчество"
-                   required="" autofocus="">
+                   minlength="5" maxlength="40" required="" autofocus="">
         </div>
 
         <div class="form-group">
-            <input type="text" name="bidth" class="form-control" placeholder="День рождения"
-                   required="" autofocus="">
+            <input type="text" name="bidth" id="bidthDay" class="form-control" placeholder="День рождения"
+                   minlength="10" maxlength="10" required="" autofocus="">
         </div>
 
         <span>
@@ -31,3 +31,8 @@
         </span>
     </div>
 </form>
+<?php if (isset($vars['error'])) : ?>
+<div class="alert alert-danger" role="alert">
+    <?php echo $vars['error'];?>
+</div>
+<?php endif;?>

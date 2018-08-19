@@ -21,7 +21,9 @@ class Main extends Model
 
     public function getPupilById($params)
     {
-        $result = $this->db->getRow("SELECT * FROM t_pupil WHERE id=:id", $params);
+        $result = $this->db->getRow("SELECT id, name, familyname, fathername,
+                                        DATE_FORMAT(bidth,'%d.%m.%Y') AS bidth 
+                                        FROM t_pupil WHERE id=:id", $params);
 
         return $result[0];
     }

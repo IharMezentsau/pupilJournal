@@ -10,12 +10,11 @@ class PupilController extends Controller
     {
         if (!empty($_POST)) {
             if ($this->model->pupilValidate()) {
-                $post = $this->postParams();
-                $params = $this->model->htmlEnt($post);
+                $params = $this->postParams();
                 $this->model->addPupil($params);
                 $this->view->redirect('/');
             } else {
-                //$this->view->message('error', $this->model->error);
+                $this->view->redirect('/add/error/' . $this->model->error);
             };
         };
 
@@ -25,10 +24,12 @@ class PupilController extends Controller
     {
         if (!empty($_POST)) {
             if ($this->model->pupilValidate()) {
-                $post = $this->postParams();
-                $params = $this->model->htmlEnt($post);
+                $params = $this->postParams();
                 $this->model->updatePupil($params);
                 $this->view->redirect('/');
+            } else {
+                $this->view->redirect('/update/' . $_POST['id'] . '/' .
+                    $this->model->error);
             }
         };
     }
@@ -67,7 +68,7 @@ class PupilController extends Controller
                 'bidth' => $bidth,
             ];
         }
-
-        return $post;
+        $params = $this->model->htmlEnt($post);
+        return $params;
     }
 }

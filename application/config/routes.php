@@ -12,7 +12,17 @@ return [
         'action' => 'add',
     ],
 
+    'add/error/{error:\d+}' => [
+        'controller' => 'main',
+        'action' => 'add',
+    ],
+
     'update/{id:\d+}' => [
+        'controller' => 'main',
+        'action' => 'update',
+    ],
+
+    'update/{id:\d+}/{error:\d+}' => [
         'controller' => 'main',
         'action' => 'update',
     ],

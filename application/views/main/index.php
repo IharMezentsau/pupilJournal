@@ -1,6 +1,6 @@
 <span>
     <p class="h3 font-weight-normal float-left">Школьный журнал</p>
-    <a class="btn btn-secondary float-right" href="/add">Добавить ученика</a>
+    <a class="btn btn-secondary float-right" href="/add/">Добавить ученика</a>
 </span>
 <table class="table table-bordered">
     <thead>
